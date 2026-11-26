@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://quintanillaenrique142-stack.github.io/helea/sitemap.xml
+Sitemap: https://heleajewelry.com/sitemap.xml
