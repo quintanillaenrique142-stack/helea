@@ -286,6 +286,8 @@ def build_products():
         details_body = desc + field("material", "Material") + field("size", "Size")
         if not details_body.strip():
             details_body = "<p>Ask us on WhatsApp for size and material details.</p>"
+        elif not p.get("size") and not DRAFT:
+            details_body += "<p>Ask us on WhatsApp for size details.</p>"
         care = f"<p>{E(p['care'])}</p>" if p.get("care") else (
             '<p class="pending">Pending from Helena: care instructions</p>' if DRAFT else "<p>Ask us how to care for this piece.</p>")
         related = [o for o in PRODUCTS if o["collection"] == p["collection"] and o["slug"] != p["slug"]][:4]

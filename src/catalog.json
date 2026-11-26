@@ -71,168 +71,192 @@
       "name": "Turquoise Aura Necklace",
       "collection": "west-coast-aura",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Stainless steel"
     },
     {
       "slug": "pink-aura-necklace",
       "name": "Pink Aura Necklace",
       "collection": "west-coast-aura",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Stainless steel"
     },
     {
       "slug": "berry-dazzle-earrings",
       "name": "Berry Dazzle Earrings",
       "collection": "west-coast-aura",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "daisy-meadow-necklace",
       "name": "Daisy Meadow Necklace",
       "collection": "west-coast-aura",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Stainless steel"
     },
     {
       "slug": "pearl-sparkle-earrings",
       "name": "Pearl and Sparkle Earrings",
       "collection": "west-coast-aura",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "emerald-forest-ear-cuffs",
       "name": "Emerald Forest Ear Cuffs",
       "collection": "west-coast-aura",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "timeless-gold-earrings",
       "name": "Timeless Gold Earrings",
       "collection": "west-coast-aura",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "garden-petal-ring",
       "name": "Garden Petal Ring",
       "collection": "west-coast-aura",
       "type": "Rings",
-      "price": 25
+      "price": 25,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "silver-gold-whale-necklace",
       "name": "Silver Gold Plated Whale Necklace",
       "collection": "pacific-pearl",
       "type": "Necklaces",
-      "price": 30
+      "price": 30,
+      "material": "Stainless steel"
     },
     {
       "slug": "silver-gold-whale-ring",
       "name": "Silver Gold Plated Whale Ring",
       "collection": "pacific-pearl",
       "type": "Rings",
-      "price": 25
+      "price": 25,
+      "material": "Stainless steel"
     },
     {
       "slug": "gold-whale-tail-necklace",
       "name": "Gold Whale Tail Necklace",
       "collection": "pacific-pearl",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "gold-whale-tail-ring",
       "name": "Gold Plated Whale Tail Ring",
       "collection": "pacific-pearl",
       "type": "Rings",
-      "price": 25
+      "price": 25,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "lucky-charm-necklace",
       "name": "Lucky Charm Necklace",
       "collection": "golden-ears",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "silver-zirconia-hoops",
       "name": "Silver Hoops Zirconias",
       "collection": "golden-ears",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Stainless steel"
     },
     {
       "slug": "gold-emerald-squares",
       "name": "Gold Emerald Squares",
       "collection": "golden-ears",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "orange-crystal-flower",
       "name": "Orange Crystal Flower",
       "collection": "golden-ears",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "silver-pearls",
       "name": "Silver Pearls",
       "collection": "golden-ears",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Stainless steel"
     },
     {
       "slug": "gold-butterfly-zirconia",
       "name": "Gold Plated Butterfly Zirconia",
       "collection": "golden-ears",
       "type": "Rings",
-      "price": 25
+      "price": 25,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "green-crystal-drop-earrings",
       "name": "Green Crystal Drop Earrings",
       "collection": "golden-ears",
       "type": "Earrings",
-      "price": 25
+      "price": 25,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "gold-open-heart-necklace",
       "name": "Gold Open Heart Necklace",
       "collection": "golden-ears",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "crystal-zirconia-drop-hoops",
       "name": "Crystal Zirconia Drop Hoops",
       "collection": "cypress",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "rainbow-necklace",
       "name": "Rainbow Necklace",
       "collection": "cypress",
       "type": "Necklaces",
-      "price": 35
+      "price": 35,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "laurel-ring",
       "name": "Laurel Ring",
       "collection": "cypress",
       "type": "Rings",
-      "price": 25
+      "price": 25,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "multiflower-hoops",
       "name": "Multiflower Hoops",
       "collection": "cypress",
       "type": "Earrings",
-      "price": 30
+      "price": 30,
+      "material": "Gold-plated stainless steel"
     },
     {
       "slug": "gold-flower-pearl-earrings",
