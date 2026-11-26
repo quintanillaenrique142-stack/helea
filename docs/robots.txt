@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://quintanillaenrique142-stack.github.io/helea/sitemap.xml

@@ -1,0 +1,186 @@
+{
+  "brand": {
+    "name": "HELÉA",
+    "tagline": "The light you carry everywhere",
+    "whatsapp": "+1 604 690 0416",
+    "instagram": "heleajewelry",
+    "email": "heleajewelry@gmail.com",
+    "location": "Vancouver, British Columbia",
+    "currency": "CAD",
+    "base_url": "https://quintanillaenrique142-stack.github.io/helea"
+  },
+  "collections": [
+    {
+      "slug": "lynn-mist",
+      "name": "Lynn Mist",
+      "story": "Inspired by the misty mornings along the Lynn Valley trails. From a morning hike to wherever the day takes you, these are the pieces you wear all day: effortless, organic, and always yours."
+    },
+    {
+      "slug": "cypress",
+      "name": "Cypress",
+      "story": "High above the city, Cypress catches the first light of the day. This collection was made for the days you want to shine a little brighter."
+    },
+    {
+      "slug": "burrard",
+      "name": "Burrard",
+      "story": "Inspired by the energy of Burrard Street, where the city never really stops. For the days that demand a little more, and the nights that deliver."
+    }
+  ],
+  "products": [
+    {
+      "slug": "gold-flower-pearl-earrings",
+      "name": "Gold Flower & Pearl Earrings",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "gold-hoop-earrings",
+      "name": "Gold Hoop Earrings",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "silver-flower-pearl-earrings",
+      "name": "Silver Flower & Pearl Earrings",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "pearl-drop-hoops",
+      "name": "Pearl Drop Hoops",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "laurel-ring",
+      "name": "Laurel Ring",
+      "collection": "lynn-mist",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "silver-hoop-earrings",
+      "name": "Silver Hoop Earrings",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "silver-hex-hoops",
+      "name": "Silver Hex Hoops",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "starlight-zirconia-hoops",
+      "name": "Starlight Zirconia Hoops",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 25
+    },
+    {
+      "slug": "gold-hex-hoops",
+      "name": "Gold Hex Hoops",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 20
+    },
+    {
+      "slug": "mermaid-tail-zirconia-hoops",
+      "name": "Mermaid Tail Zirconia Hoops",
+      "collection": "lynn-mist",
+      "type": "Earrings",
+      "price": 25
+    },
+    {
+      "slug": "crystal-zirconia-drop-hoops",
+      "name": "Crystal Zirconia Drop Hoops",
+      "collection": "cypress",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "rectangular-zirconia-hoops",
+      "name": "Rectangular Zirconia Hoops",
+      "collection": "cypress",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "emerald-zirconia-charm-necklace",
+      "name": "Emerald Zirconia Charm Necklace",
+      "collection": "cypress",
+      "type": "Necklaces",
+      "price": 30
+    },
+    {
+      "slug": "open-heart-necklace",
+      "name": "Open Heart Necklace",
+      "variants": "Gold / Silver",
+      "collection": "cypress",
+      "type": "Necklaces",
+      "price": 30
+    },
+    {
+      "slug": "gold-silver-large-hoops",
+      "name": "Gold & Silver Large Hoop Earrings",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "two-tone-triple-hoops",
+      "name": "Two-Tone Triple Hoops",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "silver-barrel-pendant-necklace",
+      "name": "Silver Barrel Pendant Necklace",
+      "collection": "burrard",
+      "type": "Necklaces",
+      "price": 30
+    },
+    {
+      "slug": "triple-layer-two-tone-hoops",
+      "name": "Triple Layer Two-Tone Hoops",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "chunky-silver-triangle-hoops",
+      "name": "Chunky Silver Triangle Hoops",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 25
+    },
+    {
+      "slug": "chunky-gold-oval-hoops",
+      "name": "Chunky Gold Oval Hoops",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 25
+    },
+    {
+      "slug": "gold-triple-beaded-ring",
+      "name": "Gold Triple Beaded Ring",
+      "collection": "burrard",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "chunky-gold-triangle-hoops",
+      "name": "Chunky Gold Triangle Hoops",
+      "collection": "burrard",
+      "type": "Earrings",
+      "price": 25
+    }
+  ]
+}
