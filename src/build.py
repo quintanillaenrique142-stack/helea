@@ -28,7 +28,16 @@ PRODUCTS = data["products"]
 BASE_URL = BRAND.get("base_url", "").rstrip("/")
 CSS = (SRC / "styles.css").read_text()
 
-COVERS = {"lynn-mist": "gold-flower-pearl-earrings", "cypress": "crystal-zirconia-drop-hoops", "burrard": "gold-silver-large-hoops"}
+COVERS = {slug: c["cover"] for slug, c in COLLS.items()}
+LIVE = [c for c in COLLS.values() if not c.get("archived")]
+PAST = [c for c in COLLS.values() if c.get("archived")]
+LIVE_PRODUCTS = [p for p in PRODUCTS if not COLLS[p["collection"]].get("archived")]
+FIRST = LIVE[0]["slug"] + ".html"
+PAST_NAME = "Summer Collection"
+
+
+def archived(p):
+    return bool(COLLS[p["collection"]].get("archived"))
 
 E = html.escape
 
@@ -54,7 +63,7 @@ def page_url(name):
 
 
 def header(active):
-    links = [("shop.html", "Shop"), ("lynn-mist.html", "Collections"), ("our-story.html", "Our Story"), ("how-to-order.html", "How to Order")]
+    links = [("shop.html", "Shop"), (FIRST, "Collections"), ("our-story.html", "Our Story"), ("how-to-order.html", "How to Order")]
     nav = "".join(
         f'<a href="{h}"{" aria-current=\"page\"" if active == h else ""}>{t}</a>' for h, t in links
     )
@@ -66,13 +75,13 @@ def header(active):
 
 
 def footer():
-    colls = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in COLLS.values())
+    colls = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in LIVE)
     return f"""<footer class="site-footer"><div class="wrap">
 <div style="display:flex;flex-direction:column;gap:12px">
 <a class="logo caps" href="index.html">HELÉA</a>
 <p>{E(BRAND['tagline'])}.<br>Everyday jewelry inspired by the Pacific and the wild landscapes of British Columbia.</p>
 </div>
-<div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">Collections</p><ul>{colls}<li><a href="shop.html">Shop all</a></li></ul></div>
+<div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">Collections</p><ul>{colls}<li><a href="shop.html">Shop all</a></li><li><a href="summer-collection.html">Past: {PAST_NAME}</a></li></ul></div>
 <div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">HELÉA</p><ul>
 <li><a href="our-story.html">Our story</a></li>
 <li><a href="how-to-order.html">How to order</a></li>
@@ -121,7 +130,7 @@ def card(p):
     return f"""<a class="card" href="{p['slug']}.html">
 <div class="card-img"><img src="assets/img/{p['slug']}.jpg" alt="{E(p['name'])}" loading="lazy" width="560" height="560"></div>
 <span class="card-name">{E(p['name'])}</span>
-<span class="card-meta"><span>{E(COLLS[p['collection']]['name'])}{variant}</span><span>{price(p)}</span></span>
+<span class="card-meta"><span>{E(COLLS[p['collection']]['name'])}{variant}</span><span>{"No longer available" if archived(p) else price(p)}</span></span>
 </a>"""
 
 
@@ -135,10 +144,10 @@ def build_home():
         f"""<a class="tile" href="{c['slug']}.html">
 <div class="tile-img"><img src="assets/img/{COVERS[c['slug']]}.jpg" alt="{E(c['name'])} collection" loading="lazy"></div>
 <h3 class="caps">{E(c['name'])}</h3><p>{E(c['story'].split('.')[0])}.</p></a>"""
-        for c in COLLS.values()
+        for c in LIVE
     )
-    featured = ["gold-flower-pearl-earrings", "laurel-ring", "crystal-zirconia-drop-hoops", "open-heart-necklace",
-                "emerald-zirconia-charm-necklace", "chunky-gold-oval-hoops", "gold-triple-beaded-ring", "mermaid-tail-zirconia-hoops"]
+    featured = ["turquoise-aura-necklace", "pearl-sparkle-earrings", "gold-whale-tail-necklace", "silver-gold-whale-ring",
+                "gold-emerald-squares", "orange-crystal-flower", "rainbow-necklace", "multiflower-hoops"]
     grid = "".join(card(next(p for p in PRODUCTS if p["slug"] == s)) for s in featured)
     body = f"""
 <section class="hero"><div class="hero-grid">
@@ -153,14 +162,14 @@ def build_home():
 </div></section>
 
 <section class="section"><div class="wrap">
-<div class="section-head center"><p class="eyebrow">Fall 2026</p><h2>The Collections</h2><p>Three collections, each named after a place in Vancouver we love.</p></div>
+<div class="section-head center"><p class="eyebrow">Fall 2026</p><h2>The Collections</h2><p>Four collections inspired by the places we love in British Columbia.</p></div>
 <div class="tiles">{tiles}</div>
 </div></section>
 
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section-head"><p class="eyebrow">Pieces to start with</p><h2>From every collection</h2></div>
 <div class="grid">{grid}</div>
-<p style="margin-top:32px"><a class="btn btn-ghost" style="width:auto" href="shop.html">See all {len(PRODUCTS)} pieces</a></p>
+<p style="margin-top:32px"><a class="btn btn-ghost" style="width:auto" href="shop.html">See all {len(LIVE_PRODUCTS)} pieces</a></p>
 </div></section>
 
 <section class="section band"><div class="wrap">
@@ -188,7 +197,7 @@ def build_home():
 </div></section>
 """
     write("index.html", doc("index.html", "HELÉA",
-        "HELÉA is everyday jewelry from Vancouver, BC. Explore the Lynn Mist, Cypress and Burrard collections and order directly on WhatsApp.",
+        "HELÉA is everyday jewelry from Vancouver, BC. Explore the Fall 2026 collections and order directly on WhatsApp.",
         body, extra_head=org_schema()))
 
 
@@ -210,23 +219,39 @@ def org_schema():
 
 # ---------- Shop & collections ----------
 def build_shop():
-    filters = '<a href="shop.html" aria-current="true">All</a>' + "".join(f'<a href="{c["slug"]}.html">{E(c["name"])}</a>' for c in COLLS.values())
+    filters = '<a href="shop.html" aria-current="true">All</a>' + "".join(f'<a href="{c["slug"]}.html">{E(c["name"])}</a>' for c in LIVE)
     blocks = ""
-    for c in COLLS.values():
+    for c in LIVE:
         items = [p for p in PRODUCTS if p["collection"] == c["slug"]]
         blocks += f"""<div class="coll-block" id="{c['slug']}"><div class="section-head"><p class="eyebrow">{len(items)} pieces</p><h2>{E(c['name'])}</h2><p>{E(c['story'])}</p></div>
 <div class="grid">{''.join(card(p) for p in items)}</div></div>"""
+    blocks += f'<p style="margin-top:56px"><a class="btn btn-ghost" style="width:auto" href="summer-collection.html">See our past {PAST_NAME}</a></p>'
     body = f"""<section class="intro"><div class="wrap"><p class="eyebrow">The Collections · Fall 2026</p><h1>Shop all pieces</h1><p>Prices in Canadian dollars. Every piece is ordered directly with us on WhatsApp or Instagram.</p></div></section>
 <section class="section"><div class="wrap"><nav class="filters" aria-label="Collections">{filters}</nav>{blocks}</div></section>"""
-    write("shop.html", doc("shop.html", "Shop all", "All HELÉA pieces from the Fall 2026 collections: earrings, hoops, necklaces and rings from CA$20.", body, active="shop.html"))
+    write("shop.html", doc("shop.html", "Shop all", "All HELÉA pieces from the Fall 2026 collections: necklaces, earrings and rings from CA$25.", body, active="shop.html"))
 
     for c in COLLS.values():
         items = [p for p in PRODUCTS if p["collection"] == c["slug"]]
-        filters = '<a href="shop.html">All</a>' + "".join(
-            f'<a href="{o["slug"]}.html"{" aria-current=\"true\"" if o["slug"] == c["slug"] else ""}>{E(o["name"])}</a>' for o in COLLS.values())
-        body = f"""<section class="intro"><div class="wrap"><p class="eyebrow">Collection · {len(items)} pieces</p><h1 class="caps" style="letter-spacing:.18em">{E(c['name'])}</h1><hr class="rule"><p>{E(c['story'])}</p></div></section>
-<section class="section"><div class="wrap"><nav class="filters" aria-label="Collections">{filters}</nav><div class="grid">{''.join(card(p) for p in items)}</div></div></section>"""
-        write(f"{c['slug']}.html", doc(f"{c['slug']}.html", f"{c['name']} Collection", c["story"], body, active="lynn-mist.html", og_image=f"assets/img/{COVERS[c['slug']]}.jpg"))
+        old = c.get("archived")
+        group = PAST if old else LIVE
+        first = '<a href="summer-collection.html">All past pieces</a>' if old else '<a href="shop.html">All</a>'
+        filters = first + "".join(
+            f'<a href="{o["slug"]}.html"{" aria-current=\"true\"" if o["slug"] == c["slug"] else ""}>{E(o["name"])}</a>' for o in group)
+        eyebrow = f"Past collection · {E(c['season'])} · No longer available" if old else f"{E(c['season'])} collection · {len(items)} pieces"
+        extra = f"<p>{E(c['story2'])}</p>" if c.get("story2") else ""
+        back = f'<p style="margin-top:48px"><a class="btn btn-ghost" style="width:auto" href="shop.html">Shop the Fall 2026 collections</a></p>' if old else ""
+        body = f"""<section class="intro"><div class="wrap"><p class="eyebrow">{eyebrow}</p><h1 class="caps" style="letter-spacing:.18em">{E(c['name'])}</h1><hr class="rule"><p>{E(c['story'])}</p>{extra}</div></section>
+<section class="section"><div class="wrap"><nav class="filters" aria-label="Collections">{filters}</nav><div class="grid">{''.join(card(p) for p in items)}</div>{back}</div></section>"""
+        write(f"{c['slug']}.html", doc(f"{c['slug']}.html", f"{c['name']} Collection", c["story"], body, active="" if old else FIRST, og_image=f"assets/img/{COVERS[c['slug']]}.jpg"))
+
+    blocks = ""
+    for c in PAST:
+        items = [p for p in PRODUCTS if p["collection"] == c["slug"]]
+        blocks += f"""<div class="coll-block"><div class="section-head"><h2>{E(c['name'])}</h2><p>{E(c['story'])}</p></div>
+<div class="grid">{''.join(card(p) for p in items)}</div></div>"""
+    body = f"""<section class="intro"><div class="wrap"><p class="eyebrow">Past collection · No longer available</p><h1>{PAST_NAME}</h1><hr class="rule"><p>The pieces that started HELÉA. These are no longer available, but you can find our current pieces in the Fall 2026 collections.</p><p><a class="btn btn-cream" href="shop.html">Shop Fall 2026</a></p></div></section>
+<section class="section"><div class="wrap">{blocks}</div></section>"""
+    write("summer-collection.html", doc("summer-collection.html", PAST_NAME, "HELÉA's past Summer Collection: Lynn Mist, Cypress and Burrard. These pieces are no longer available.", body))
 
 
 # ---------- Product pages ----------
@@ -255,20 +280,32 @@ def build_products():
         related = [o for o in PRODUCTS if o["collection"] == p["collection"] and o["slug"] != p["slug"]][:4]
         order_btn = (f'<a class="btn btn-wa" href="{wa}" target="_blank" rel="noopener">{WA_ICON}Order on WhatsApp</a>' if not sold
                      else '<span class="btn btn-ghost" aria-disabled="true">Sold out</span>')
+        old = archived(p)
+        if old:
+            actions = f"""<p class="variant">This piece is from our past {PAST_NAME} and is no longer available.</p>
+<div class="actions"><a class="btn btn-ghost" href="shop.html">Shop the Fall 2026 collections</a></div>"""
+            price_html = ""
+            bar = ""
+            crumb_root = f'<a href="summer-collection.html">{PAST_NAME}</a>'
+        else:
+            actions = f"""<div class="actions">
+{order_btn}
+<a class="btn btn-ghost" href="{ig_link()}" target="_blank" rel="noopener">{IG_ICON}Message us on Instagram</a>
+</div>
+<p class="note">Your message opens with this piece and its price already written. We'll reply to confirm availability, payment and delivery.</p>"""
+            price_html = f'<p class="price">{price(p)}<small>CAD</small></p>'
+            bar = f"""<div class="order-bar"><div class="ob-name"><strong>{E(p['name'])}</strong>{price(p)}</div>{order_btn.replace('btn btn-wa', 'btn btn-wa ob-btn')}</div>"""
+            crumb_root = '<a href="shop.html">Shop</a>'
         body = f"""<div class="wrap">
-<nav class="crumbs" aria-label="Breadcrumb"><a href="shop.html">Shop</a><span>/</span><a href="{c['slug']}.html">{E(c['name'])}</a><span>/</span><span>{E(p['name'])}</span></nav>
+<nav class="crumbs" aria-label="Breadcrumb">{crumb_root}<span>/</span><a href="{c['slug']}.html">{E(c['name'])}</a><span>/</span><span>{E(p['name'])}</span></nav>
 <article class="product">
 <div class="product-img"><img src="assets/img/{p['slug']}.jpg" alt="{E(p['name'])}" width="560" height="560" fetchpriority="high"></div>
 <div class="product-info">
 <p class="eyebrow">{E(c['name'])} Collection · {E(p['type'])}</p>
 <h1>{E(p['name'])}</h1>
-<p class="price">{price(p)}<small>CAD</small></p>
+{price_html}
 {variant}
-<div class="actions">
-{order_btn}
-<a class="btn btn-ghost" href="{ig_link()}" target="_blank" rel="noopener">{IG_ICON}Message us on Instagram</a>
-</div>
-<p class="note">Your message opens with this piece and its price already written. We'll reply to confirm availability, payment and delivery.</p>
+{actions}
 <div class="details">
 <details open><summary>Details</summary><div class="body">{details_body}</div></details>
 <details><summary>About {E(c['name'])}</summary><div class="body"><p>{E(c['story'])}</p></div></details>
@@ -281,16 +318,17 @@ def build_products():
 <div class="section-head"><p class="eyebrow">More from</p><h2>{E(c['name'])}</h2></div>
 <div class="grid">{''.join(card(o) for o in related)}</div>
 </div></section>
-<div class="order-bar"><div class="ob-name"><strong>{E(p['name'])}</strong>{price(p)}</div>{order_btn.replace('btn btn-wa', 'btn btn-wa ob-btn')}</div>"""
+{bar}"""
         schema = {"@context": "https://schema.org", "@type": "Product", "name": p["name"], "brand": {"@type": "Brand", "name": "HELÉA"},
                   "image": page_url(f"assets/img/{p['slug']}.jpg"), "category": p["type"],
-                  "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": BRAND["currency"]}}
+                  "offers": {"@type": "Offer", "price": str(p["price"]), "priceCurrency": BRAND["currency"],
+                             "availability": "https://schema.org/Discontinued" if old else "https://schema.org/InStock"}}
         if p.get("description"):
             schema["description"] = p["description"]
         write(f"{p['slug']}.html", doc(f"{p['slug']}.html", p["name"],
-            f"{p['name']} from the HELÉA {c['name']} collection, {price(p)}. Order directly on WhatsApp.",
+            (f"{p['name']} from the HELÉA {c['name']} collection ({PAST_NAME}). No longer available." if old else f"{p['name']} from the HELÉA {c['name']} collection, {price(p)}. Order directly on WhatsApp."),
             body, extra_head=f'<script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>',
-            body_class="has-order-bar", og_image=f"assets/img/{p['slug']}.jpg"))
+            body_class="" if old else "has-order-bar", og_image=f"assets/img/{p['slug']}.jpg"))
 
 
 # ---------- Story & order ----------
@@ -313,7 +351,7 @@ def build_story():
 <div class="split-copy prose">
 <p class="eyebrow">Everyday wear</p>
 <h2>From a morning hike in Lynn Canyon to a candlelit dinner downtown</h2>
-<p>Every collection is named after a place in Vancouver: the misty Lynn Valley trails, the first light on Cypress, and the energy of Burrard Street.</p>
+<p>Every collection is named after a place we love in British Columbia: the forests of the West Coast, the Pacific, the Golden Ears mountains and the first light on Cypress.</p>
 <p><a class="btn btn-ghost" style="width:auto" href="shop.html">Explore the collections</a></p>
 </div>
 <div class="split-img"><img src="assets/img/lifestyle-water.jpg" alt="Hands wearing HELÉA rings at the water's edge" loading="lazy"></div>
@@ -343,7 +381,7 @@ def build_order():
 
 
 def build_meta():
-    pages = ["index.html", "shop.html", "our-story.html", "how-to-order.html"] + [f"{c}.html" for c in COLLS] + [f"{p['slug']}.html" for p in PRODUCTS]
+    pages = ["index.html", "shop.html", "our-story.html", "how-to-order.html"] + ["summer-collection.html"] + [f"{c}.html" for c in COLLS] + [f"{p['slug']}.html" for p in PRODUCTS]
     if BASE_URL:
         urls = "".join(f"<url><loc>{page_url(p)}</loc></url>" for p in pages)
         write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')

@@ -11,22 +11,228 @@
   },
   "collections": [
     {
-      "slug": "lynn-mist",
-      "name": "Lynn Mist",
-      "story": "Inspired by the misty mornings along the Lynn Valley trails. From a morning hike to wherever the day takes you, these are the pieces you wear all day: effortless, organic, and always yours."
+      "slug": "west-coast-aura",
+      "name": "West Coast Aura",
+      "season": "Fall 2026",
+      "cover": "turquoise-aura-necklace",
+      "story": "Inspired by the colors of the wild. There is something magical about the forests of the West Coast. The deep greens of the evergreens, the golden glow of sunlight through the trees, the earthy tones of the mountains and the soft blues of the Pacific. A palette painted by nature, where every shade tells a story.",
+      "story2": "Inspired by the breathtaking beauty of Vancouver, where the ocean meets the mountains and every wave tells a story. Designed to move with you, from sea to sky, through every adventure."
+    },
+    {
+      "slug": "pacific-pearl",
+      "name": "Pacific Pearl",
+      "season": "Fall 2026",
+      "cover": "gold-whale-tail-necklace",
+      "story": "Born in Vancouver, worn everywhere. Where the Pacific meets the mountains. Delicate pearls, soft gold and silver tones, for the woman who moves between worlds with ease."
+    },
+    {
+      "slug": "golden-ears",
+      "name": "Golden Ears",
+      "season": "Fall 2026",
+      "cover": "gold-emerald-squares",
+      "story": "Inspired by the golden light that filters through the ancient forests of British Columbia's Golden Ears mountains. Quiet trails, cedar scent, and the stillness between the trees: pieces designed to feel grounding, luminous, and endlessly connected to nature."
     },
     {
       "slug": "cypress",
       "name": "Cypress",
+      "season": "Fall 2026",
+      "cover": "rainbow-necklace",
       "story": "High above the city, Cypress catches the first light of the day. This collection was made for the days you want to shine a little brighter."
+    },
+    {
+      "slug": "lynn-mist",
+      "name": "Lynn Mist",
+      "story": "Inspired by the misty mornings along the Lynn Valley trails. From a morning hike to wherever the day takes you, these are the pieces you wear all day: effortless, organic, and always yours.",
+      "season": "Summer 2026",
+      "archived": true,
+      "cover": "gold-flower-pearl-earrings"
+    },
+    {
+      "slug": "cypress-summer",
+      "name": "Cypress (Summer)",
+      "story": "High above the city, Cypress catches the first light of the day. This collection was made for the days you want to shine a little brighter.",
+      "season": "Summer 2026",
+      "archived": true,
+      "cover": "emerald-zirconia-charm-necklace"
     },
     {
       "slug": "burrard",
       "name": "Burrard",
-      "story": "Inspired by the energy of Burrard Street, where the city never really stops. For the days that demand a little more, and the nights that deliver."
+      "story": "Inspired by the energy of Burrard Street, where the city never really stops. For the days that demand a little more, and the nights that deliver.",
+      "season": "Summer 2026",
+      "archived": true,
+      "cover": "gold-silver-large-hoops"
     }
   ],
   "products": [
+    {
+      "slug": "turquoise-aura-necklace",
+      "name": "Turquoise Aura Necklace",
+      "collection": "west-coast-aura",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "pink-aura-necklace",
+      "name": "Pink Aura Necklace",
+      "collection": "west-coast-aura",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "berry-dazzle-earrings",
+      "name": "Berry Dazzle Earrings",
+      "collection": "west-coast-aura",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "daisy-meadow-necklace",
+      "name": "Daisy Meadow Necklace",
+      "collection": "west-coast-aura",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "pearl-sparkle-earrings",
+      "name": "Pearl and Sparkle Earrings",
+      "collection": "west-coast-aura",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "emerald-forest-ear-cuffs",
+      "name": "Emerald Forest Ear Cuffs",
+      "collection": "west-coast-aura",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "timeless-gold-earrings",
+      "name": "Timeless Gold Earrings",
+      "collection": "west-coast-aura",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "garden-petal-ring",
+      "name": "Garden Petal Ring",
+      "collection": "west-coast-aura",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "silver-gold-whale-necklace",
+      "name": "Silver Gold Plated Whale Necklace",
+      "collection": "pacific-pearl",
+      "type": "Necklaces",
+      "price": 30
+    },
+    {
+      "slug": "silver-gold-whale-ring",
+      "name": "Silver Gold Plated Whale Ring",
+      "collection": "pacific-pearl",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "gold-whale-tail-necklace",
+      "name": "Gold Whale Tail Necklace",
+      "collection": "pacific-pearl",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "gold-whale-tail-ring",
+      "name": "Gold Plated Whale Tail Ring",
+      "collection": "pacific-pearl",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "lucky-charm-necklace",
+      "name": "Lucky Charm Necklace",
+      "collection": "golden-ears",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "silver-zirconia-hoops",
+      "name": "Silver Hoops Zirconias",
+      "collection": "golden-ears",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "gold-emerald-squares",
+      "name": "Gold Emerald Squares",
+      "collection": "golden-ears",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "orange-crystal-flower",
+      "name": "Orange Crystal Flower",
+      "collection": "golden-ears",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "silver-pearls",
+      "name": "Silver Pearls",
+      "collection": "golden-ears",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "gold-butterfly-zirconia",
+      "name": "Gold Plated Butterfly Zirconia",
+      "collection": "golden-ears",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "green-crystal-drop-earrings",
+      "name": "Green Crystal Drop Earrings",
+      "collection": "golden-ears",
+      "type": "Earrings",
+      "price": 25
+    },
+    {
+      "slug": "gold-open-heart-necklace",
+      "name": "Gold Open Heart Necklace",
+      "collection": "golden-ears",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "crystal-zirconia-drop-hoops",
+      "name": "Crystal Zirconia Drop Hoops",
+      "collection": "cypress",
+      "type": "Earrings",
+      "price": 30
+    },
+    {
+      "slug": "rainbow-necklace",
+      "name": "Rainbow Necklace",
+      "collection": "cypress",
+      "type": "Necklaces",
+      "price": 35
+    },
+    {
+      "slug": "laurel-ring",
+      "name": "Laurel Ring",
+      "collection": "cypress",
+      "type": "Rings",
+      "price": 25
+    },
+    {
+      "slug": "multiflower-hoops",
+      "name": "Multiflower Hoops",
+      "collection": "cypress",
+      "type": "Earrings",
+      "price": 30
+    },
     {
       "slug": "gold-flower-pearl-earrings",
       "name": "Gold Flower & Pearl Earrings",
@@ -54,13 +260,6 @@
       "collection": "lynn-mist",
       "type": "Earrings",
       "price": 20
-    },
-    {
-      "slug": "laurel-ring",
-      "name": "Laurel Ring",
-      "collection": "lynn-mist",
-      "type": "Rings",
-      "price": 25
     },
     {
       "slug": "silver-hoop-earrings",
@@ -98,23 +297,16 @@
       "price": 25
     },
     {
-      "slug": "crystal-zirconia-drop-hoops",
-      "name": "Crystal Zirconia Drop Hoops",
-      "collection": "cypress",
-      "type": "Earrings",
-      "price": 30
-    },
-    {
       "slug": "rectangular-zirconia-hoops",
       "name": "Rectangular Zirconia Hoops",
-      "collection": "cypress",
+      "collection": "cypress-summer",
       "type": "Earrings",
       "price": 30
     },
     {
       "slug": "emerald-zirconia-charm-necklace",
       "name": "Emerald Zirconia Charm Necklace",
-      "collection": "cypress",
+      "collection": "cypress-summer",
       "type": "Necklaces",
       "price": 30
     },
@@ -122,7 +314,7 @@
       "slug": "open-heart-necklace",
       "name": "Open Heart Necklace",
       "variants": "Gold / Silver",
-      "collection": "cypress",
+      "collection": "cypress-summer",
       "type": "Necklaces",
       "price": 30
     },

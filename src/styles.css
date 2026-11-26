@@ -90,14 +90,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .band .eyebrow { color: var(--cream); opacity: .85; }
 
 /* Collection tiles */
-.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .tile { text-decoration: none; display: flex; flex-direction: column; gap: 14px; }
 .tile-img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--cream-soft); }
 .tile-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
 .tile:hover img { transform: scale(1.03); }
 .tile h3 { letter-spacing: 0.08em; }
 .tile p { font-size: .92rem; color: var(--sage-deep); }
-@media (max-width: 760px) { .tiles { grid-template-columns: 1fr; } .tile-img { aspect-ratio: 16 / 11; } }
+@media (max-width: 900px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; } .tile p { font-size: .84rem; } }
 
 /* Product grid */
 .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 20px; }
