@@ -30,6 +30,10 @@ CSS = (SRC / "styles.css").read_text()
 
 COVERS = {slug: c["cover"] for slug, c in COLLS.items()}
 LIVE = [c for c in COLLS.values() if not c.get("archived")]
+SHOW_PAST = bool(BRAND.get("show_past", False))  # set "show_past": true in catalog.json to publish the past collection again
+if not SHOW_PAST:
+    COLLS = {k: v for k, v in COLLS.items() if not v.get("archived")}
+    PRODUCTS = [p for p in PRODUCTS if p["collection"] in COLLS]
 PAST = [c for c in COLLS.values() if c.get("archived")]
 LIVE_PRODUCTS = [p for p in PRODUCTS if not COLLS[p["collection"]].get("archived")]
 FIRST = LIVE[0]["slug"] + ".html"
@@ -74,14 +78,18 @@ def header(active):
 </div></header>"""
 
 
+PAST_LINK_TMPL = '<li><a href="summer-collection.html">Past: {name}</a></li>'
+
+
 def footer():
+    PAST_LINK = PAST_LINK_TMPL.format(name=PAST_NAME) if SHOW_PAST else ""
     colls = "".join(f'<li><a href="{c["slug"]}.html">{E(c["name"])}</a></li>' for c in LIVE)
     return f"""<footer class="site-footer"><div class="wrap">
 <div style="display:flex;flex-direction:column;gap:12px">
 <a class="logo caps" href="index.html">HELÉA</a>
 <p>{E(BRAND['tagline'])}.<br>Everyday jewelry inspired by the Pacific and the wild landscapes of British Columbia.</p>
 </div>
-<div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">Collections</p><ul>{colls}<li><a href="shop.html">Shop all</a></li><li><a href="summer-collection.html">Past: {PAST_NAME}</a></li></ul></div>
+<div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">Collections</p><ul>{colls}<li><a href="shop.html">Shop all</a></li>{PAST_LINK}</ul></div>
 <div><p class="eyebrow" style="color:inherit;opacity:.7;margin-bottom:10px">HELÉA</p><ul>
 <li><a href="our-story.html">Our story</a></li>
 <li><a href="how-to-order.html">How to order</a></li>
@@ -225,7 +233,8 @@ def build_shop():
         items = [p for p in PRODUCTS if p["collection"] == c["slug"]]
         blocks += f"""<div class="coll-block" id="{c['slug']}"><div class="section-head"><p class="eyebrow">{len(items)} pieces</p><h2>{E(c['name'])}</h2><p>{E(c['story'])}</p></div>
 <div class="grid">{''.join(card(p) for p in items)}</div></div>"""
-    blocks += f'<p style="margin-top:56px"><a class="btn btn-ghost" style="width:auto" href="summer-collection.html">See our past {PAST_NAME}</a></p>'
+    if SHOW_PAST:
+        blocks += f'<p style="margin-top:56px"><a class="btn btn-ghost" style="width:auto" href="summer-collection.html">See our past {PAST_NAME}</a></p>'
     body = f"""<section class="intro"><div class="wrap"><p class="eyebrow">The Collections · Fall 2026</p><h1>Shop all pieces</h1><p>Prices in Canadian dollars. Every piece is ordered directly with us on WhatsApp or Instagram.</p></div></section>
 <section class="section"><div class="wrap"><nav class="filters" aria-label="Collections">{filters}</nav>{blocks}</div></section>"""
     write("shop.html", doc("shop.html", "Shop all", "All HELÉA pieces from the Fall 2026 collections: necklaces, earrings and rings from CA$25.", body, active="shop.html"))
@@ -244,6 +253,8 @@ def build_shop():
 <section class="section"><div class="wrap"><nav class="filters" aria-label="Collections">{filters}</nav><div class="grid">{''.join(card(p) for p in items)}</div>{back}</div></section>"""
         write(f"{c['slug']}.html", doc(f"{c['slug']}.html", f"{c['name']} Collection", c["story"], body, active="" if old else FIRST, og_image=f"assets/img/{COVERS[c['slug']]}.jpg"))
 
+    if not SHOW_PAST:
+        return
     blocks = ""
     for c in PAST:
         items = [p for p in PRODUCTS if p["collection"] == c["slug"]]
@@ -381,7 +392,7 @@ def build_order():
 
 
 def build_meta():
-    pages = ["index.html", "shop.html", "our-story.html", "how-to-order.html"] + ["summer-collection.html"] + [f"{c}.html" for c in COLLS] + [f"{p['slug']}.html" for p in PRODUCTS]
+    pages = ["index.html", "shop.html", "our-story.html", "how-to-order.html"] + (["summer-collection.html"] if SHOW_PAST else []) + [f"{c}.html" for c in COLLS] + [f"{p['slug']}.html" for p in PRODUCTS]
     if BASE_URL:
         urls = "".join(f"<url><loc>{page_url(p)}</loc></url>" for p in pages)
         write("sitemap.xml", f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
@@ -394,6 +405,12 @@ def build_meta():
 
 if __name__ == "__main__":
     OUT.mkdir(exist_ok=True)
+    for f in OUT.glob("*.html"):
+        f.unlink()
+    if SHOW_PAST:  # past-collection photos live in src/archive-img while hidden
+        import shutil
+        for f in (SRC / "archive-img").glob("*.jpg"):
+            shutil.copy(f, OUT / "assets" / "img" / f.name)
     build_home(); build_shop(); build_products(); build_story(); build_order()
     pages = build_meta()
     print(f"Built {len(pages)} pages into {OUT} (draft={DRAFT}, artifact={ARTIFACT})")
